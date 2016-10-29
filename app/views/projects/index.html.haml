@@ -1,6 +1,6 @@
 %h1 Listing projects
 
-%table
+%table.table
   %thead
     %tr
       %th Name
@@ -15,7 +15,7 @@
       %tr
         %td= project.name
         %td= project.description
-        %td= project.current_progress
+        %td= project.progress
         %td= link_to 'Show', project
         %td= link_to 'Edit', edit_project_path(project)
         %td= link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }

@@ -1,4 +1,8 @@
-= form_for @project do |f|
+- project_id = nil
+- project = nil
+= simple_nested_form_for @project do |f|
+  - project_id = f.object.id
+  - project = f.object
   - if @project.errors.any?
     #error_explanation
       %h2= "#{pluralize(@project.errors.count, "error")} prohibited this project from being saved:"
@@ -6,14 +10,46 @@
         - @project.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = f.label :current_progress
-    = f.text_field :current_progress
-  .actions
-    = f.submit 'Save'
+  = f.input :name
+  = f.input :description
+  = f.input :progress, as: :string, input_html: { value: number_with_precision(f.object.progress, precision: 2) }
+
+  = render partial: 'due_dates/dates_table', locals: {f: f}
+
+  .form-group
+    -# .input-group
+    -#   = radio_button_tag 'add_type', 'auto', checked: true
+    -#   = label_tag 'add_type_auto', 'Auto'
+    -#   = radio_button_tag 'add_type', 'manual'
+    -#   = label_tag 'add_type_manual', 'Manual'
+    -# = button_tag 'Add due date', type: 'button', id: 'add_due_date', class: 'btn btn-default'
+    = button_tag 'Generate due dates', type: 'button', id: 'add_due_date', class: 'btn btn-default'
+    = f.button :submit, 'Save', class: 'btn btn-primary'
+
+
+
+.modal.fade{role: "dialog", tabindex:"-1", id: 'model_add_due_date'}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title
+          Add due dates
+      .modal-body
+        .form-group
+          = label_tag :start_date
+          = text_field_tag :start_date, '', class: 'form-control datetimepicker'
+        .form-group
+          = label_tag :end_date
+          = text_field_tag :end_date, '', class: 'form-control datetimepicker'
+        .form-group
+          = label_tag :frequency
+          = text_field_tag :frequency, 'weekly', readonly: true, class: 'form-control'
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+        - if project_id
+          = text_field_tag :generate_due_dates_link, generate_project_due_dates_path(project_id), class: 'hidden'
+        - else
+          = text_field_tag :generate_due_dates_link, generate_project_due_dates_path(-1), class: 'hidden'
+        %button.btn.btn-primary{id: 'modal_generate_dates', type: "button"} Generate

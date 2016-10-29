@@ -1,0 +1,29 @@
+%h1 Listing due_dates
+
+%table.table
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th Date
+      %th Progress
+      %th Project id
+      %th
+      %th
+      %th
+
+  %tbody
+    - @due_dates.each do |due_date|
+      %tr
+        %td= due_date.name
+        %td= due_date.description
+        %td= due_date.date
+        %td= due_date.progress
+        %td= due_date.project_id
+        %td= link_to 'Show', due_date
+        %td= link_to 'Edit', edit_due_date_path(due_date)
+        %td= link_to 'Destroy', due_date, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Due date', new_due_date_path

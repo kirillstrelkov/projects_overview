@@ -8,8 +8,33 @@
   = @project.description
 %p
   %b Current progress:
-  = @project.current_progress
+  = @project.progress
 
 = link_to 'Edit', edit_project_path(@project)
 \|
 = link_to 'Back', projects_path
+
+
+.panel.panel-default.project
+  .panel-heading
+    %h3.panel-title
+      = @project.name
+  .panel-body
+    .progress
+      .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "#{@project.progress}", "aria-valuenow" => "#{@project.progress}", :role => "progressbar", :style => "min-width: 2em;width: #{@project.progress}%;"}
+        .span
+          = "#{@project.progress}%"
+      - @project.due_dates.sort_by { |d| d.date }.each do |date|
+        .bar-step{'data-date' => date.date}
+          .bar-text
+            = date.name
+            %br
+            = date.date
+
+
+    -# %ul.list-group
+    -#   - @project.due_dates.each do |date|
+    -#     %li.list-group-item
+    -#       %i.fa.fa-dot-circle-o{"aria-hidden" => "true"}
+    -#       = date.name
+    -#       = date.date

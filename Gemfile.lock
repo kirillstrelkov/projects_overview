@@ -55,6 +55,8 @@ GEM
     bootstrap-select-rails (1.6.3)
     bootstrap-social-rails (4.12.0)
       railties (>= 3.1)
+    bootstrap3-datetimepicker-rails (4.17.42)
+      momentjs-rails (>= 2.8.1)
     builder (3.2.2)
     byebug (9.0.6)
     capybara (2.9.2)
@@ -188,6 +190,8 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.9.1)
+    momentjs-rails (2.15.1)
+      railties (>= 3.1)
     multi_json (1.12.1)
     multi_test (0.1.2)
     multi_xml (0.5.5)
@@ -348,6 +352,9 @@ GEM
       websocket (~> 1.0)
     sexp_processor (4.6.0)
     shellany (0.0.1)
+    simple_form (3.3.1)
+      actionpack (> 4, < 5.1)
+      activemodel (> 4, < 5.1)
     slop (3.6.0)
     sort_alphabetical (1.0.2)
       unicode_utils (>= 1.2.2)
@@ -373,6 +380,11 @@ GEM
     unicode_utils (1.4.0)
     warden (1.2.6)
       rack (>= 1.0)
+    web-console (2.3.0)
+      activemodel (>= 4.0)
+      binding_of_caller (>= 0.7.2)
+      railties (>= 4.0)
+      sprockets-rails (>= 2.0, < 4.0)
     websocket (1.2.3)
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
@@ -392,6 +404,7 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap-select-rails
   bootstrap-social-rails
+  bootstrap3-datetimepicker-rails (~> 4.17.42)
   byebug
   capybara
   chromedriver-helper
@@ -410,6 +423,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+  momentjs-rails (>= 2.9.0)
   omniauth-facebook
   omniauth-google-oauth2
   omniauth-vkontakte
@@ -420,15 +434,16 @@ DEPENDENCIES
   rails_12factor
   rails_admin
   redis-rails
-  responders
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   selenium-webdriver
+  simple_form
   sort_alphabetical
   spring
   turbolinks
   uglifier (>= 1.3.0)
+  web-console
   will_paginate
   will_paginate-bootstrap
 

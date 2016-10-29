@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @due_date.name
+%p
+  %b description:
+  = @due_date.description
+%p
+  %b Date:
+  = @due_date.date
+%p
+  %b Progress:
+  = @due_date.progress
+%p
+  %b Project id:
+  = @due_date.project_id
+
+= link_to 'Edit', edit_due_date_path(@due_date)
+\|
+= link_to 'Back', due_dates_path

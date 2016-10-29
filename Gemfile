@@ -40,10 +40,14 @@ gem 'omniauth-google-oauth2'
 # gem 'unicorn'
 
 gem 'haml-rails'
-gem 'responders'
 
 gem 'bootstrap-sass'
 gem 'bootstrap-select-rails'
+
+gem 'simple_form'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
+
 gem 'font-awesome-rails'
 gem 'bootstrap-social-rails'
 gem 'redis-rails'
@@ -79,4 +83,5 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'spring'
+  gem 'web-console'
 end

@@ -1,0 +1,26 @@
+%table.table#dates_table
+  %thead
+    %tr
+      %th #
+      %th Name
+      %th Description
+      %th Date
+      %th Progress
+      %th.hidden Project id
+  %tbody
+    - i = 0
+    = f.simple_fields_for :due_dates, html: {class: 'form-horizontal'}, defaults: {label: false} do |dd|
+      - i += 1
+      %tr
+        %td
+          = i
+        %td
+          = dd.input :name
+        %td
+          = dd.input :description
+        %td
+          = dd.input :date, as: :string, input_html: { class: 'datetimepicker'}
+        %td
+          = dd.input :progress, as: :string, input_html: { value: number_with_precision(dd.object.progress, precision: 2) }
+        %td
+          = dd.input :project_id, as: :hidden

@@ -1,0 +1,1 @@
+json.partial! "due_dates/due_date", due_date: @due_date
