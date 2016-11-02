@@ -4,6 +4,6 @@ FactoryGirl.define do
     description "MyString"
     date "2016-10-18 23:35:03"
     progress 1.5
-    project nil
+    project_id 1
   end
 end
