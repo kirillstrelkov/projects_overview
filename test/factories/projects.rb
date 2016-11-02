@@ -2,6 +2,6 @@ FactoryGirl.define do
   factory :project do
     name "MyString"
     description "MyText"
-    progress 1.5
+    progress 0.0
   end
 end
