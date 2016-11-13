@@ -23,19 +23,18 @@ Feature: User should be able to create project
     And I should see "0.0" on page
     And I should see "End date" on page
     And I should see "100.0" on page
-    And I should see "Week" on page
+    And I should see "Week 1" before "Week 2" on page
+    And I should see "Week 2" before "Week 3" on page
     And I should see "10/29/2016 8:34 PM" on page
     And I should see "11/26/2016 8:33 PM" on page
     When I click "Save"
     Then I should see "Project was successfully created." on page
 
-    Scenario: User should see calendar while generating
-      Given I am on main page
-      When I click "New Project"
-      Then I click "Generate due dates"
-      And I click css element "#start_date"
-      Then I should see calendar
-      And I click css element "#end_date"
-      Then I should see calendar
-  
-# TODO: create invalid cases or create checks for model/controllers
+  Scenario: User should see calendar while generating
+    Given I am on main page
+    When I click "New Project"
+    Then I click "Generate due dates"
+    And I click css element "#start_date"
+    Then I should see calendar
+    And I click css element "#end_date"
+    Then I should see calendar

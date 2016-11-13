@@ -11,11 +11,6 @@ RSpec.describe DueDate, type: :model do
       expect(user).not_to be_valid
     end
 
-    it 'has no project id' do
-      user = FactoryGirl.build(:due_date, project_id: nil)
-      expect(user).not_to be_valid
-    end
-
     it 'has no name' do
       user = FactoryGirl.build(:due_date, name: nil)
       expect(user).not_to be_valid

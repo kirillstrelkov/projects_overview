@@ -8,3 +8,6 @@ Feature: User should be able to edit project
     # And I fill in "project[progress]" with "0.0"
     # And I click "Save"
     # Then I should see "Project was successfully created." on page
+    # TODO: dates should not be duplicated
+
+  Scenario: User should be able to edit name, descriptions and progress

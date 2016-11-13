@@ -4,11 +4,12 @@ class DueDatesController < ApplicationController
   def generate
     project_id = params[:project_id]
     project = project_id == '-1' ? Project.new : Project.find(project_id)
-    due_dates = params[:data].sort_by { |k, v| v['progress'].to_f }.map do |i, d|
+    data = params[:data].values().sort_by { |v| v['progress'].to_f }
+    due_dates = data.map do |d|
       due_date = DateTime.parse(d['due_date'])
       progress = d['progress'].to_f
 
-      name = "Week #{i}"
+      name = "Week #{data.index(d)}"
       case progress
       when 0
         name = 'Start date'

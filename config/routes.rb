@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :projects do
     resources :due_dates do
       collection do
-        get :generate
+        post :generate
       end
     end
   end

@@ -6,11 +6,11 @@
   z-index:1;
   font-size:12px;
   color: black;
-  border-left: thick solid black;
+  border-left: thin groove black;
 
   &:last-of-type {
     border-left: none;
-    border-right: thick solid black;
+    border-right: thin groove black;
     .bar-text {
       text-align: right;
     }

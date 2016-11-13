@@ -34,6 +34,14 @@ Then(/^I should see "([^"]*)" on page$/) do |expected_text|
   end
 end
 
+Then(/^I should see "([^"]*)" before "([^"]*)" on page$/) do |text1, text2|
+  wait_for do
+    input_values = all('input', visible: true).map { |i| i.value }.join(' ')
+    text = page.text + ' ' + input_values
+    expect(text.index(text1)).to be < text.index(text2), "'#{text1}' should be before '#{text2}'"
+  end
+end
+
 Then(/^I should not see "([^"]*)" on page$/) do |text|
   assert_no_text(text)
 end
