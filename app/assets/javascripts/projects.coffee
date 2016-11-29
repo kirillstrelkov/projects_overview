@@ -70,7 +70,7 @@ update_progress_bars = (project)->
   $(project).find('.progress-bar.negative').width("#{progress_diff}%")
 
 init_datetimepickers = ->
-  $('.datetimepicker:not(.formatted)').each ->
+  $('.datetimepicker').each ->
     init_val = $(this).attr('value')
     empty = init_val == ''
     if moment(init_val, moment.ISO_8601).isValid() or empty
