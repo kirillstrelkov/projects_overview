@@ -1,0 +1,13 @@
+%p
+  %b Name:
+  = due_date.name
+%p
+  %b Description:
+  = due_date.description
+%p
+  %b Date:
+  %span.datetime
+    = due_date.date.iso8601
+%p
+  %b Progress:
+  = due_date.progress

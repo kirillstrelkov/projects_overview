@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'projects#index'
+  get 'projects/view' => 'projects#view'
 
   resources :projects do
     resources :due_dates do

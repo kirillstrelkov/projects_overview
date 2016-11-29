@@ -21,6 +21,10 @@ class ProjectsController < ApplicationController
   def edit
   end
 
+  def view
+    @projects = Project.all
+  end
+
   # POST /projects
   # POST /projects.json
   def create
@@ -40,6 +44,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+    @project.due_dates.destroy_all
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }

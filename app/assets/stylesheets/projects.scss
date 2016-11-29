@@ -21,3 +21,20 @@
   padding-top: 20px;
   // height: 40px;
 }
+
+// vis styles:
+.vis-item.vis-range {
+  border: 0;
+  .vis-item-overflow .vis-item-content {
+    display: block;
+    padding: 0;
+    .project.panel {
+      margin: 0;
+      .panel-body {
+        padding-top: 0;
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+}

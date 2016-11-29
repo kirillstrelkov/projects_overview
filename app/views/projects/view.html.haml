@@ -1,0 +1,4 @@
+#visualization
+.hidden
+  -@projects.each do|project|
+    = render partial: 'project', locals: {project: project}

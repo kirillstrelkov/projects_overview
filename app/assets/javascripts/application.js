@@ -13,12 +13,15 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery_nested_form
 //= require bootstrap-select
 //= require bootstrap/alert
 //= require bootstrap/dropdown
 //= require bootstrap/modal
+//= require bootstrap/tooltip
+//= require bootstrap/popover
 //= require moment
 //= require bootstrap-datetimepicker
-//= require jquery_nested_form
+//= require vis
 //= require_tree .
 //= require turbolinks

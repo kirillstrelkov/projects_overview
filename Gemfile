@@ -52,6 +52,7 @@ gem 'font-awesome-rails'
 gem 'bootstrap-social-rails'
 gem 'redis-rails'
 
+gem 'visjs-rails'
 gem 'sort_alphabetical'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'

@@ -4,7 +4,7 @@ class DueDatesController < ApplicationController
   def generate
     project_id = params[:project_id]
     project = project_id == '-1' ? Project.new : Project.find(project_id)
-    data = params[:data].values().sort_by { |v| v['progress'].to_f }
+    data = params[:data].values.sort_by { |v| v['progress'].to_f }
     due_dates = data.map do |d|
       due_date = DateTime.parse(d['due_date'])
       progress = d['progress'].to_f
@@ -17,16 +17,16 @@ class DueDatesController < ApplicationController
         name = 'End date'
       end
 
-      description = ''
-      project.due_dates << DueDate.new(
+      DueDate.new(
         name: name,
         progress: progress,
         date: due_date,
-        description: description,
+        description: '',
         project_id: project.id
       )
     end
 
+    project.due_dates = due_dates
     @project = project
     render partial: 'generate'
   end

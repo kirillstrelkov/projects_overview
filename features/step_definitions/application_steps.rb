@@ -17,6 +17,21 @@ Given(/^there is a project "([^"]*)" with (\d+\.\d+) progress and due dates:$/) 
   end
 end
 
+Given(/^there is a project "([^"]*)" with "([^"]*)" description, (\d+\.\d+) progress and due dates:$/) do |name, description, progress, table|
+  project = FactoryGirl.create(:project, name: name, description: description, progress: progress.to_f)
+  data = table.raw
+  header = data.first
+  data[1..-1].each do |row|
+    hash = Hash[header.zip(row)]
+    hash[:project_id] = project.id
+    FactoryGirl.create(:due_date, hash)
+  end
+end
+
+When(/^I am on project edit page$/) do
+  visit("/projects/#{Project.first.id}/edit")
+end
+
 When(/^I am on project view page$/) do
   visit("/projects/#{Project.first.id}")
 end

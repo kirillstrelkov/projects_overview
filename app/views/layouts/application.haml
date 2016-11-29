@@ -7,8 +7,7 @@
     = csrf_meta_tags
   %body
     %div{class: 'container col-md-12'}
-      -# = text_field_tag 'hidden_datetime', @current_datetime, class: 'datetimepicker form-control'
-      = hidden_field_tag 'hidden_datetime', @current_datetime, class: 'datetimepicker form-control'
+      = hidden_field_tag 'hidden_datetime', @current_datetime.iso8601, class: 'datetimepicker form-control'
       = yield
 
     %div

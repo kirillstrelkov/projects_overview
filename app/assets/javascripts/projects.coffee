@@ -33,9 +33,6 @@ format_projects = ->
 get_data = (obj, key)->
   $(obj).attr(key)
 
-get_js_date = (text)->
-  moment(text).toDate()
-
 get_timestamp = (date_string)->
   Date.parse(date_string.replace(' UTC', 'Z'))
 
@@ -44,8 +41,7 @@ round = (number)->
 
 get_progress = (start, current, end)->
   if start.isBefore(end)
-    progress = (current - start) / (end - start) * 100
-    Math.round(progress * 100) / 100
+    round((current - start) / (end - start) * 100)
   else
     0.0
 
@@ -74,30 +70,72 @@ update_progress_bars = (project)->
   $(project).find('.progress-bar.negative').width("#{progress_diff}%")
 
 init_datetimepickers = ->
-  $('.datetimepicker').each ->
+  $('.datetimepicker:not(.formatted)').each ->
     init_val = $(this).attr('value')
-    $(this).datetimepicker({
-      locale: navigator.language || navigator.userLanguage,
-    })
-    $(this).data("DateTimePicker").date(moment(init_val))
+    empty = init_val == ''
+    if moment(init_val, moment.ISO_8601).isValid() or empty
+      $(this).datetimepicker({
+        locale: navigator.language || navigator.userLanguage,
+      })
+      $(this).addClass('formatted')
+      $(this).data("DateTimePicker").date(if empty then moment() else moment(init_val))
 
-format_datetime_to_local = ->
+format_datetime_to_local = (parent)->
+  parent = if parent == undefined then $('body') else $(parent)
   ldf = $('#hidden_datetime').data('DateTimePicker').date()._locale._longDateFormat
   datetime_format = "#{ldf.L} #{ldf.LT}"
-  $('.datetime').each ->
+  parent.find('.datetime').each ->
     $(this).text(moment($(this).text()).format(datetime_format))
 
+get_project_data = ->
+  $('.project').map ->
+    project = $(this)
+    {
+      content: project.prop('outerHTML'),
+      start: moment(project.find('.bar-step').first().data('date')),
+      end: moment(project.find('.bar-step').last().data('date'))
+    }
+
+init_popovers = ->
+  popovers = $('[data-toggle="popover"]')
+  popovers.popover({html: true, container: "body > .container", placement: "bottom"})
+  popovers.each ()->
+    $(this).on 'shown.bs.popover', ()->
+      format_datetime_to_local('.popover')
+
 init = ->
+  # todo init only once!!!
+  # console.log('Hello')
+  init_popovers()
   init_datetimepickers()
   format_datetime_to_local() # should be called before format projects
   format_projects()
 
-# INIT
-$(document).ready ->
-  init()
+  viz = $('#visualization')
+  if viz.length > 0 and viz.children().length == 0
+    container = viz[0]
+    data = get_project_data().toArray()
+    options = {
+      zoomable: false,
+      start: moment().subtract(1, 'months'),
+      end: moment().add(1, 'months'),
+      selectable: false,
+    }
+    timeline = new vis.Timeline(container, data, options)
+    timeline.setCurrentTime($('#hidden_datetime').data('DateTimePicker').date())
+    timeline.on 'changed', (event)->
+      $('.vis-item').each ()->
+        item = $(this)
+        if parseFloat(item.css('left')) < 0
+          item.find('.vis-item-content').css('left', '0')
+
+      format_projects()
 
 # EVENTS
 $(document).on "turbolinks:load", ->
+  init()
+
+$(document).ready ->
   init()
 
 $(document).on 'click', '#project_save', (event)->

@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     else
       datetime = params['current_datetime']
       @current_datetime = DateTime.parse(datetime) unless datetime.nil?
-      @current_datetime ||= session[:current_datetime]
+      @current_datetime = DateTime.parse(session[:current_datetime]) unless session[:current_datetime].nil?
       if @current_datetime.nil?
         @current_datetime = DateTime.now
       end

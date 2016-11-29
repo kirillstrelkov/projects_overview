@@ -17,7 +17,7 @@
       %tr
         %td= due_date.name
         %td= due_date.description
-        %td= due_date.date
+        %td= due_date.date.iso8601
         %td= due_date.progress
         %td= due_date.project_id
         %td= link_to 'Show', due_date

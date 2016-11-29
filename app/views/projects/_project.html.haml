@@ -1,0 +1,19 @@
+.panel.panel-default.project
+  .panel-heading
+    %h3.panel-title
+      - formatted_project = render partial: 'projects/show_compact', locals: {project: project}
+      %button.btn-link{"data-content" => formatted_project, "data-toggle" => "popover", :type => "button", 'data-trigger' => "focus"}
+        = project.name
+  .panel-body
+    .progress
+      .progress-bar.progress-bar-success.positive{role: "progressbar", style: "width: #{project.progress}%;"}
+        %span
+          = "#{project.progress}%"
+      .progress-bar.progress-bar-danger.negative{role: "progressbar", style: "width: 0.0%;"}
+        %span
+      - project.due_dates.sort_by { |d| d.date }.each do |date|
+        - formatted_due_date = render partial: 'due_dates/show_compact', locals: {due_date: date}
+        .bar-step{'data-date' => date.date.iso8601, 'data-progress' => date.progress}
+          .bar-text
+            %button.btn-link{"data-content" => formatted_due_date, "data-toggle" => "popover", :type => "button", 'data-trigger' => "focus"}
+              = date.name

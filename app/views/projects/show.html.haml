@@ -14,30 +14,4 @@
 \|
 = link_to 'Back', projects_path
 
-
-.panel.panel-default.project
-  .panel-heading
-    %h3.panel-title
-      = @project.name
-  .panel-body
-    .progress
-      .progress-bar.progress-bar-success.positive{role: "progressbar", style: "width: #{@project.progress}%;"}
-        %span
-          = "#{@project.progress}%"
-      .progress-bar.progress-bar-danger.negative{role: "progressbar", style: "width: 0.0%;"}
-        %span
-      - @project.due_dates.sort_by { |d| d.date }.each do |date|
-        .bar-step{'data-date' => date.date, 'data-progress' => date.progress}
-          .bar-text
-            = date.name
-            %br
-            %span.datetime
-              = date.date
-
-
-    -# %ul.list-group
-    -#   - @project.due_dates.each do |date|
-    -#     %li.list-group-item
-    -#       %i.fa.fa-dot-circle-o{"aria-hidden" => "true"}
-    -#       = date.name
-    -#       = date.date
+= render partial: 'project', locals: {project: @project}
