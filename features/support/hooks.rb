@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 After do |scenario|
   if scenario.failed?
     timestamp = Time.now.strftime('%Y%m%d%T')

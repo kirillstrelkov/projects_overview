@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Then(/^I should see popover$/) do
   expect(page).to have_selector('.popover', visible: true)
 end

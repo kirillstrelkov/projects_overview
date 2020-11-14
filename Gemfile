@@ -1,37 +1,39 @@
-ruby '2.2.3'
+# frozen_string_literal: true
+
+ruby '2.5.1'
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
 gem 'pg'
+gem 'rails', '5.2.0'
 gem 'rails_12factor', group: :production
 
 gem 'puma', group: :production
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
 gem 'jquery-turbolinks'
+gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sdoc', group: :doc
 
-gem 'rails_admin'
 gem 'devise'
 gem 'omniauth-facebook'
-gem 'omniauth-vkontakte'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-vkontakte'
+gem 'rails_admin'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -44,16 +46,16 @@ gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'bootstrap-select-rails'
 
-gem 'simple_form'
-gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'simple_form'
 
-gem 'font-awesome-rails'
 gem 'bootstrap-social-rails'
+gem 'font-awesome-rails'
 gem 'redis-rails'
 
-gem 'visjs-rails'
 gem 'sort_alphabetical'
+gem 'visjs-rails'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 
@@ -62,27 +64,28 @@ gem 'will_paginate-bootstrap'
 
 group :development, :test do
   gem 'byebug'
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-cucumber'
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'guard'
+  gem 'guard-cucumber'
+  gem 'guard-rspec'
 end
 
 group :test do
+  gem 'capybara'
+  gem 'chromedriver-helper'
+  gem 'cucumber'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
-  gem 'cucumber'
-  gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
   gem 'poltergeist'
   gem 'rspec-rails'
+  gem 'selenium-webdriver'
 end
 
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'rubocop'
   gem 'spring'
   gem 'web-console'
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class DueDatesController < ApplicationController
-  before_action :set_due_date, only: [:show, :edit, :update, :destroy]
+  before_action :set_due_date, only: %i[show edit update destroy]
 
   def generate
     project_id = params[:project_id]
@@ -39,8 +41,7 @@ class DueDatesController < ApplicationController
 
   # GET /due_dates/1
   # GET /due_dates/1.json
-  def show
-  end
+  def show; end
 
   # GET /due_dates/new
   def new
@@ -48,8 +49,7 @@ class DueDatesController < ApplicationController
   end
 
   # GET /due_dates/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /due_dates
   # POST /due_dates.json
@@ -92,13 +92,14 @@ class DueDatesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_due_date
-      @due_date = DueDate.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def due_date_params
-      params.require(:due_date).permit(:name, :description, :date, :progress, :project_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_due_date
+    @due_date = DueDate.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def due_date_params
+    params.require(:due_date).permit(:name, :description, :date, :progress, :project_id)
+  end
 end

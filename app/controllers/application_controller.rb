@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -13,9 +15,7 @@ class ApplicationController < ActionController::Base
       datetime = params['current_datetime']
       @current_datetime = DateTime.parse(datetime) unless datetime.nil?
       @current_datetime = DateTime.parse(session[:current_datetime]) unless session[:current_datetime].nil?
-      if @current_datetime.nil?
-        @current_datetime = DateTime.now
-      end
+      @current_datetime = DateTime.now if @current_datetime.nil?
       session[:current_datetime] = @current_datetime
     end
   end

@@ -1,4 +1,5 @@
-# encoding: UTF-8
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,30 +12,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102203055) do
-
+ActiveRecord::Schema.define(version: 20_161_102_203_055) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "due_dates", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.datetime "date"
-    t.float    "progress"
-    t.integer  "project_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  create_table 'due_dates', force: :cascade do |t|
+    t.string   'name'
+    t.string   'description'
+    t.datetime 'date'
+    t.float    'progress'
+    t.integer  'project_id'
+    t.datetime 'created_at',  null: false
+    t.datetime 'updated_at',  null: false
   end
 
-  add_index "due_dates", ["project_id"], name: "index_due_dates_on_project_id", using: :btree
+  add_index 'due_dates', ['project_id'], name: 'index_due_dates_on_project_id', using: :btree
 
-  create_table "projects", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.float    "progress",    default: 0.0
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+  create_table 'projects', force: :cascade do |t|
+    t.string   'name'
+    t.text     'description'
+    t.float    'progress', default: 0.0
+    t.datetime 'created_at',                null: false
+    t.datetime 'updated_at',                null: false
   end
 
-  add_foreign_key "due_dates", "projects"
+  add_foreign_key 'due_dates', 'projects'
 end

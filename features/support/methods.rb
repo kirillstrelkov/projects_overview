@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 def wait_for_visible(*args)
   wait_for do
     element = first(*args)
-    element && element.visible?
+    element&.visible?
   end
 end
 
@@ -13,8 +15,8 @@ def host_redirected?(timeout = Capybara.default_max_wait_time)
   end
 end
 
-def wait_for(timeout=Capybara.default_max_wait_time, &condition)
-  def bool_func_call(bool_func, safe=true)
+def wait_for(timeout = Capybara.default_max_wait_time, &condition)
+  def bool_func_call(bool_func, safe = true)
     if safe
       begin
         return_value = bool_func.call
@@ -34,6 +36,7 @@ def wait_for(timeout=Capybara.default_max_wait_time, &condition)
   time_before = Time.now
   while Time.now - time_before < timeout
     break if bool_func_call(condition) == true
+
     sleep 0.1
   end
 
