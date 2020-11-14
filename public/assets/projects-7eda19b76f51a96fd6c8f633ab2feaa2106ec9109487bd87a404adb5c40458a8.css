@@ -1,0 +1,47 @@
+/* line 4, app/assets/stylesheets/projects.scss */
+.bar-step {
+  position: absolute;
+  z-index: 1;
+  font-size: 12px;
+  color: black;
+  border-left: thin groove black;
+}
+
+/* line 11, app/assets/stylesheets/projects.scss */
+.bar-step:last-of-type {
+  border-left: none;
+  border-right: thin groove black;
+}
+
+/* line 14, app/assets/stylesheets/projects.scss */
+.bar-step:last-of-type .bar-text {
+  text-align: right;
+}
+
+/* line 20, app/assets/stylesheets/projects.scss */
+.bar-text {
+  padding-top: 20px;
+}
+
+/* line 26, app/assets/stylesheets/projects.scss */
+.vis-item.vis-range {
+  border: 0;
+}
+
+/* line 28, app/assets/stylesheets/projects.scss */
+.vis-item.vis-range .vis-item-overflow .vis-item-content {
+  display: block;
+  padding: 0;
+}
+
+/* line 31, app/assets/stylesheets/projects.scss */
+.vis-item.vis-range .vis-item-overflow .vis-item-content .project.panel {
+  margin: 0;
+}
+
+/* line 33, app/assets/stylesheets/projects.scss */
+.vis-item.vis-range .vis-item-overflow .vis-item-content .project.panel .panel-body {
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+}

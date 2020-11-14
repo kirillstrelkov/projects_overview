@@ -9,24 +9,24 @@ Given(/^current date is "([^"]*)"$/) do |datetime|
 end
 
 Given(/^there is a project "([^"]*)" with (\d+\.\d+) progress and due dates:$/) do |name, progress, table|
-  project = FactoryGirl.create(:project, name: name, progress: progress.to_f)
+  project = FactoryBot.create(:project, name: name, progress: progress.to_f)
   data = table.raw
   header = data.first
   data[1..-1].each do |row|
     hash = Hash[header.zip(row)]
     hash[:project_id] = project.id
-    FactoryGirl.create(:due_date, hash)
+    FactoryBot.create(:due_date, hash)
   end
 end
 
 Given(/^there is a project "([^"]*)" with "([^"]*)" description, (\d+\.\d+) progress and due dates:$/) do |name, description, progress, table|
-  project = FactoryGirl.create(:project, name: name, description: description, progress: progress.to_f)
+  project = FactoryBot.create(:project, name: name, description: description, progress: progress.to_f)
   data = table.raw
   header = data.first
   data[1..-1].each do |row|
     hash = Hash[header.zip(row)]
     hash[:project_id] = project.id
-    FactoryGirl.create(:due_date, hash)
+    FactoryBot.create(:due_date, hash)
   end
 end
 
