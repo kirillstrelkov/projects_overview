@@ -13,10 +13,14 @@
  *= require_tree .
  *= require_self
  */
- @import "bootstrap-sprockets";
- @import "bootstrap";
- @import "bootstrap-select";
- @import "font-awesome";
- @import "bootstrap-social";
- @import 'bootstrap-datetimepicker';
- @import "vis";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap-select";
+@import "font-awesome";
+@import "bootstrap-social";
+@import "bootstrap-datetimepicker";
+@import "vis";
+
+#visualization .vis-current-time {
+  z-index: 2;
+}

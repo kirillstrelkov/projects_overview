@@ -21,7 +21,7 @@
 //= require bootstrap/tooltip
 //= require bootstrap/popover
 //= require moment
-//= require bootstrap-datetimepicker
 //= require vis
+//= require bootstrap-datetimepicker
 //= require_tree .
 //= require turbolinks

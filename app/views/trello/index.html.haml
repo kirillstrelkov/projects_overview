@@ -1,0 +1,20 @@
+%div.container
+  %div.panel.panel-default
+    %div.panel-body
+      %div.container
+        %div.row
+          %div.col-md-2
+            %button.btn.btn-primary#load-timline
+              1. Get trello boards
+          %div.col-md-10
+            %label.form-label
+              2. Choose Trello board:
+            %select.form-select{id: 'boardSelect', disabled: true}
+              %option
+                Get trello boards first
+
+%div.container-fluid
+  #visualization
+
+
+%script{src: "https://trello.com/1/client.js?key=8dad1da28917769d2b1304e0d4f9caef"}

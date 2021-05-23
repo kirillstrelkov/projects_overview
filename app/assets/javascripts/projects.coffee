@@ -46,7 +46,7 @@ get_progress = (start, current, end)->
     0.0
 
 update_progress_bars = (project)->
-  current_datetime = $('#hidden_datetime').data('DateTimePicker').date()
+  current_datetime = moment()
   current_progress = parseFloat($(project).find('.progress-bar.positive span').text())
   expected_datetime = null
   expected_progress = null
@@ -82,7 +82,7 @@ init_datetimepickers = ->
 
 format_datetime_to_local = (parent)->
   parent = if parent == undefined then $('body') else $(parent)
-  ldf = $('#hidden_datetime').data('DateTimePicker').date()._locale._longDateFormat
+  ldf = moment()._locale._longDateFormat
   datetime_format = "#{ldf.L} #{ldf.LT}"
   parent.find('.datetime').each ->
     $(this).text(moment($(this).text()).format(datetime_format))
@@ -105,7 +105,9 @@ init_popovers = ->
 
 init = ->
   # todo init only once!!!
-  # console.log('Hello')
+  if window.location.href.indexOf('projects') == -1
+    return
+  console.log('Hello')
   init_popovers()
   init_datetimepickers()
   format_datetime_to_local() # should be called before format projects
@@ -122,7 +124,6 @@ init = ->
       selectable: false,
     }
     timeline = new vis.Timeline(container, data, options)
-    timeline.setCurrentTime($('#hidden_datetime').data('DateTimePicker').date())
     timeline.on 'changed', (event)->
       $('.vis-item').each ()->
         item = $(this)
