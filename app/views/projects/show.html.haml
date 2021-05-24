@@ -1,17 +1,18 @@
-%p#notice= notice
+%div.container
+  %p#notice= notice
 
-%p
-  %b Name:
-  = @project.name
-%p
-  %b Description:
-  = @project.description
-%p
-  %b Current progress:
-  = @project.progress
+  %p
+    %b Name:
+    = @project.name
+  %p
+    %b Description:
+    = @project.description
+  %p
+    %b Current progress:
+    = @project.progress
 
-= link_to 'Edit', edit_project_path(@project)
-\|
-= link_to 'Back', projects_path
+  = link_to 'Edit', edit_project_path(@project)
+  \|
+  = link_to 'Back', projects_path
 
-= render partial: 'project', locals: {project: @project}
+  = render partial: 'project', locals: {project: @project}
