@@ -82,10 +82,13 @@ init_datetimepickers = ->
 
 format_datetime_to_local = (parent)->
   parent = if parent == undefined then $('body') else $(parent)
-  ldf = moment()._locale._longDateFormat
-  datetime_format = "#{ldf.L} #{ldf.LT}"
+
+  localeData = moment.localeData()
+  dateFormat = localeData.longDateFormat('L')
+  timeFormat = localeData.longDateFormat('LT')
+  datetime_format = "#{dateFormat} #{timeFormat}"
   parent.find('.datetime').each ->
-    $(this).text(moment($(this).text()).format(datetime_format))
+    $(this).text(moment($(this).text().trim()).format(datetime_format))
 
 get_project_data = ->
   $('.project').map ->
@@ -98,7 +101,7 @@ get_project_data = ->
 
 init_popovers = ->
   popovers = $('[data-toggle="popover"]')
-  popovers.popover({html: true, container: "body > .container", placement: "bottom"})
+  popovers.popover({html: true, container: "body", placement: "bottom"})
   popovers.each ()->
     $(this).on 'shown.bs.popover', ()->
       format_datetime_to_local('.popover')
@@ -107,7 +110,7 @@ init = ->
   # todo init only once!!!
   if window.location.href.indexOf('projects') == -1
     return
-  console.log('Hello')
+
   init_popovers()
   init_datetimepickers()
   format_datetime_to_local() # should be called before format projects
