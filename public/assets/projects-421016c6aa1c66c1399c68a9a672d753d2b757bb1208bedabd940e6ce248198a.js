@@ -53,7 +53,7 @@
 
   update_progress_bars = function(project) {
     var current_datetime, current_progress, expected_datetime, expected_progress, progress_diff, steps;
-    current_datetime = $('#hidden_datetime').data('DateTimePicker').date();
+    current_datetime = moment();
     current_progress = parseFloat($(project).find('.progress-bar.positive span').text());
     expected_datetime = null;
     expected_progress = null;
@@ -93,12 +93,14 @@
   };
 
   format_datetime_to_local = function(parent) {
-    var datetime_format, ldf;
+    var dateFormat, datetime_format, localeData, timeFormat;
     parent = parent === void 0 ? $('body') : $(parent);
-    ldf = $('#hidden_datetime').data('DateTimePicker').date()._locale._longDateFormat;
-    datetime_format = ldf.L + " " + ldf.LT;
+    localeData = moment.localeData();
+    dateFormat = localeData.longDateFormat('L');
+    timeFormat = localeData.longDateFormat('LT');
+    datetime_format = dateFormat + " " + timeFormat;
     return parent.find('.datetime').each(function() {
-      return $(this).text(moment($(this).text()).format(datetime_format));
+      return $(this).text(moment($(this).text().trim()).format(datetime_format));
     });
   };
 
@@ -119,7 +121,7 @@
     popovers = $('[data-toggle="popover"]');
     popovers.popover({
       html: true,
-      container: "body > .container",
+      container: "body",
       placement: "bottom"
     });
     return popovers.each(function() {
@@ -131,6 +133,9 @@
 
   init = function() {
     var container, data, options, timeline, viz;
+    if (window.location.href.indexOf('projects') === -1) {
+      return;
+    }
     init_popovers();
     init_datetimepickers();
     format_datetime_to_local();
@@ -146,7 +151,6 @@
         selectable: false
       };
       timeline = new vis.Timeline(container, data, options);
-      timeline.setCurrentTime($('#hidden_datetime').data('DateTimePicker').date());
       return timeline.on('changed', function(event) {
         $('.vis-item').each(function() {
           var item;
