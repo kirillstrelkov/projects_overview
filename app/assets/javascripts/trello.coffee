@@ -32,6 +32,9 @@ loadBoards = (resp)->
   )
 
 drawCard = (card, progressValue)->
+  if progressValue < 1
+    progressValue = progressValue * 100
+
   url = card.shortUrl
   startDate = card.start
   endDate = card.due
