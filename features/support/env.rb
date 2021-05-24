@@ -63,7 +63,7 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 $browser = ENV['BROWSER'] || :chrome
 $browser = $browser.to_sym
 
-$driver = ENV['DRIVER'] || :poltergeist
+$driver = ENV['DRIVER'] || :selenium_chrome_headless
 $driver = $driver.to_sym
 
 puts "Driver: #{$driver}"
