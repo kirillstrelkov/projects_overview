@@ -26,23 +26,29 @@ loadBoards = (resp)->
   token = getTrelloToken()
   window.Trello.get(
     '/members/me/boards', 
-    {'token': token}
+    {'token': token, 'filter': 'open'}
     (resp) ->
       addBoards(resp)
   )
 
 drawCard = (card, progressValue)->
+  url = card.shortUrl
   startDate = card.start
   endDate = card.due
   if isUndefined(startDate) || isUndefined(endDate)
     return
 
+  momentStartDate = moment(startDate)
+  momentEndDate = moment(endDate)
+  dateOnly = momentEndDate.diff(momentStartDate, 'days') < 14
+  formattedStartDate = formatDatetime(momentStartDate, dateOnly)
+  formattedEndDate = formatDatetime(momentEndDate, dateOnly)
 
   content = """
-<div class="panel panel-default project" id="#{card.id}">
+<div class="panel panel-default card" id="#{card.id}">
   <div class="panel-heading">
     <h3 class="panel-title">
-    #{card.name}
+      <a href="#{url}" target="_blank">#{card.name}</a>
     </h3>
   </div>
   <div class="panel-body">
@@ -55,17 +61,15 @@ drawCard = (card, progressValue)->
       <div class="progress-bar progress-bar-danger negative" role="progressbar" style="width: 0.0%;">
         <span></span>
       </div>
-      <div class="bar-step" data-date="#{startDate}">
-        <div class="bar-text start hidden"> 
-          #{startDate}
-        </div>
-      </div>
-      <div class="bar-step" data-date="#{endDate}">
-        <div class="bar-text end hidden"> 
-          #{endDate}
-        </div>
-      </div>
     </div>
+  </div>
+  <div class="panel-footer">
+    <span class="start-date"> 
+      #{formattedStartDate}
+    </span>
+    <span class="end-date"> 
+      #{formattedEndDate}
+    </span>
   </div>
 </div>
 """
@@ -129,7 +133,10 @@ loadTimeline = ->
   trelloWrapper(
     "/boards/#{boardId}/customFields", 
     (customFields)->
-      trelloWrapper("/boards/#{boardId}/cards", (cards)-> loadCards(cards, customFields))
+      trelloWrapper(
+        "/boards/#{boardId}/cards", 
+        (cards)-> loadCards(cards, customFields)
+      )
   )
 
 $(document).ready ->
@@ -177,6 +184,18 @@ visInit = ()->
     visTimeline = new vis.Timeline(container, window.visDataSet, options)
 
 
+formatDatetime = (datetime, dateOnly=false)->
+  localeData = moment.localeData()
+  dateFormat = localeData.longDateFormat('L')
+  if dateOnly
+    datetime_format = "#{dateFormat}"
+  else
+    timeFormat = localeData.longDateFormat('LT')
+    datetime_format = "#{dateFormat} #{timeFormat}"
+
+  datetime.format(datetime_format)
+
+
 format_projects = (id)->
   window.visDataSet.forEach(format_project);
 
@@ -186,13 +205,6 @@ format_project = (id)->
 
   start_datetime = moment($(project).find('.progress').data('date-start'))
   end_datetime = moment($(project).find('.progress').data('date-end'))
-
-  ldf = moment()._locale._longDateFormat
-  datetime_format = "#{ldf.L} #{ldf.LT}"
-  project.find('.bar-text.start').text(start_datetime.format(datetime_format))
-  project.find('.bar-text.start').removeClass('hidden')
-  project.find('.bar-text.end').text(end_datetime.format(datetime_format))
-  project.find('.bar-text.end').removeClass('hidden')
 
   timestamps = $.map(project.find('.bar-step'), (m)->
     get_timestamp(get_data(m, 'data-date'))
