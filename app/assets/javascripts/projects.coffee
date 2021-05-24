@@ -71,9 +71,10 @@ update_progress_bars = (project)->
 
 init_datetimepickers = ->
   $('.datetimepicker').each ->
-    init_val = $(this).attr('value')
+    init_val = $(this).attr('value').replace(' UTC', 'Z')
     empty = init_val == ''
-    if moment(init_val, moment.ISO_8601).isValid() or empty
+    not_formatted = !$(this).hasClass('formatted')
+    if moment(init_val, moment.ISO_8601).isValid() || empty || not_formatted
       $(this).datetimepicker({
         locale: navigator.language || navigator.userLanguage,
       })
@@ -88,6 +89,9 @@ format_datetime_to_local = (parent)->
   timeFormat = localeData.longDateFormat('LT')
   datetime_format = "#{dateFormat} #{timeFormat}"
   parent.find('.datetime').each ->
+    # if $(this).is('input')
+    #   $(this).val(moment($(this).val().trim()).format(datetime_format))
+    # else
     $(this).text(moment($(this).text().trim()).format(datetime_format))
 
 get_project_data = ->
@@ -113,7 +117,7 @@ init = ->
 
   init_popovers()
   init_datetimepickers()
-  format_datetime_to_local() # should be called before format projects
+  format_datetime_to_local() # should be called before format projects after datetimepickers
   format_projects()
 
   viz = $('#visualization')

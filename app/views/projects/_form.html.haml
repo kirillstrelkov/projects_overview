@@ -17,12 +17,6 @@
   = render partial: 'due_dates/dates_table', locals: {f: f}
 
   .form-group
-    -# .input-group
-    -#   = radio_button_tag 'add_type', 'auto', checked: true
-    -#   = label_tag 'add_type_auto', 'Auto'
-    -#   = radio_button_tag 'add_type', 'manual'
-    -#   = label_tag 'add_type_manual', 'Manual'
-    -# = button_tag 'Add due date', type: 'button', id: 'add_due_date', class: 'btn btn-default'
     = button_tag 'Generate due dates', type: 'button', id: 'add_due_date', class: 'btn btn-default'
     = f.button :submit, 'Save', id: 'project_save', class: 'btn btn-primary'
 

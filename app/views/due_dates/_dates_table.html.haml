@@ -19,8 +19,8 @@
         %td
           = dd.input :description
         %td
-          = dd.input :date, as: :string, input_html: { class: 'datetimepicker'}
+          = dd.input :date, as: :string, input_html: { class: 'datetimepicker', readonly: true}
         %td
-          = dd.input :progress, as: :string, input_html: { value: number_with_precision(dd.object.progress, precision: 2) }
+          = dd.input :progress, as: :string, input_html: { value: number_with_precision(dd.object.progress, precision: 2) , readonly: true}
         %td
           = dd.input :project_id, as: :hidden
