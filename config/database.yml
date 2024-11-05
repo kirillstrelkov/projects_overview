@@ -20,9 +20,7 @@ test: &test
 
 production:
   <<: *default
-  database: db/proj_view_production
-  username: <%= ENV['DB_USERNAME'] %> 
-  password: <%= ENV['DB_PASSWORD'] %> 
+  url: <%= ENV['DATABASE_URL'] %>
 
 cucumber:
   <<: *test
