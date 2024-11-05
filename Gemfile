@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
-ruby '2.5.1'
+ruby '3.3.5'
 source 'https://rubygems.org'
+
+gem 'bootsnap'
+gem 'ostruct'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'pg'
-gem 'rails', '~> 5.2.0'
+gem 'rails', '~> 7.2.0'
 gem 'rails_12factor', group: :production
 
 gem 'puma', group: :production
@@ -17,7 +20,7 @@ gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -89,3 +92,4 @@ group :development do
   gem 'spring'
   gem 'web-console'
 end
+gem 'sassc-rails'
